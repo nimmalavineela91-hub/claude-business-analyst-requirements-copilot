@@ -1,7 +1,9 @@
 # AI Business Analyst Copilot
 
 An AI-powered Business Analysis application that transforms unstructured stakeholder notes and business problems into structured, actionable requirements using Anthropic Claude.
+## Application Demo
 
+![AI Business Analyst Copilot Demo](screenshots/ai-ba-copilot-demo.png)
 ## Project Overview
 
 Business Analysts often receive requirements through meetings, emails, stakeholder discussions, and fragmented notes. Converting this information into structured business requirements manually can be time-consuming.
