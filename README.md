@@ -1,38 +1,43 @@
 # AI Business Analyst Copilot
 
-An AI-powered Business Analysis application that transforms unstructured stakeholder notes and business problems into structured, actionable requirements using Anthropic Claude.
+An AI-powered Business Analysis application that transforms unstructured stakeholder notes, meeting discussions, and business problems into structured, actionable BA artifacts using Anthropic Claude.
+
+The project demonstrates how Generative AI can support a Business Analyst during requirements discovery, analysis, documentation, and clarification.
+
+---
+
 ## Application Demo
 
 ![AI Business Analyst Copilot Demo](screenshots/ai-ba-copilot-demo.png)
-## Project Overview
 
-Business Analysts often receive requirements through meetings, emails, stakeholder discussions, and fragmented notes. Converting this information into structured business requirements manually can be time-consuming.
-
-AI Business Analyst Copilot uses Generative AI to analyze stakeholder input and automatically generate structured Business Analysis artifacts.
+---
 
 ## Business Problem
 
-Unstructured stakeholder information can lead to:
+Business Analysts often receive requirements through multiple unstructured sources such as:
 
-- Missing or unclear requirements
-- Duplicate requirements
-- Inconsistent documentation
-- Longer requirement-analysis cycles
-- Communication gaps between business and technical teams
+- Stakeholder meetings
+- Emails
+- Business notes
+- Customer feedback
+- Operational discussions
+- High-level problem statements
+
+Manually converting this information into structured requirements can be time-consuming and may introduce ambiguity, missing requirements, or inconsistent documentation.
+
+The AI Business Analyst Copilot helps accelerate this process by analyzing stakeholder input and generating structured Business Analysis artifacts.
+
+---
 
 ## Solution
 
-The application allows a Business Analyst to enter stakeholder notes or business requirements and uses Claude AI to convert them into structured analysis.
+The application allows a Business Analyst to enter raw stakeholder requirements into a simple interface.
 
-The generated output can include:
+The input is sent to a Node.js backend, which securely communicates with the Anthropic Claude API.
 
-- Business Requirements
-- User Stories
-- Acceptance Criteria
-- Risks and Gaps
-- Stakeholder Questions
+Claude analyzes the business context and generates structured BA documentation that is displayed as individual analysis sections in the React interface.
 
-## How It Works
+### Workflow
 
 Stakeholder Input  
 ↓  
@@ -42,76 +47,177 @@ Node.js / Express Backend
 ↓  
 Anthropic Claude API  
 ↓  
-AI Requirement Analysis  
+AI Requirements Analysis  
 ↓  
-Structured BA Output
+Structured Business Analysis Output
 
-## Key Features
+---
 
-- Analyze unstructured stakeholder notes
-- Identify business objectives and requirements
-- Generate user stories
-- Generate acceptance criteria
-- Identify risks and requirement gaps
-- Generate clarification questions
-- Present structured analysis through a simple web interface
+## Business Analysis Artifacts Generated
 
-## Technology Stack
+The application can generate:
 
-**Frontend**
-- React
-- Vite
-- JavaScript
-- CSS
+1. Executive Summary
+2. Business Objectives
+3. Functional Requirements
+4. Non-Functional Requirements
+5. Business Rules
+6. User Stories
+7. Acceptance Criteria
+8. Risks & Gaps
+9. Assumptions
+10. Stakeholder Clarification Questions
 
-**Backend**
-- Node.js
-- Express.js
+These outputs help convert early-stage stakeholder information into artifacts that can support requirement refinement and stakeholder discussions.
 
-**AI Integration**
-- Anthropic Claude API
-
-**Development & Version Control**
-- VS Code
-- Git
-- GitHub
+---
 
 ## Example Use Case
 
-### Stakeholder Input
+### Stakeholder Problem
 
-Customer support requests are received through email, phone calls, and spreadsheets. Requests are frequently duplicated and there is no centralized tracking system. Management wants a single platform where customers can submit requests, support agents can manage tickets, and managers can monitor resolution time and SLA performance.
+A customer support organization manages requests across email, phone calls, and spreadsheets.
 
-### AI Business Analysis Output
+This creates:
 
-The AI analyzes the stakeholder information and generates structured artifacts such as:
+- Duplicate requests
+- Slow response times
+- Limited operational visibility
+- Inconsistent support processes
+- Difficulty monitoring SLA performance
 
-- Business objectives
-- Functional requirements
-- User stories
+### AI-Assisted Analysis
+
+The Business Analyst enters the stakeholder notes into the application.
+
+Claude analyzes the information and generates structured outputs such as:
+
+- Business objectives for centralizing support operations
+- Functional requirements for ticket management
+- Role-based access requirements
+- User stories for customers, agents, and managers
 - Acceptance criteria
-- Risks and gaps
-- Stakeholder clarification questions
+- Business rules
+- Risks and missing information
+- Questions requiring stakeholder clarification
 
-## Business Value
+---
 
-This solution demonstrates how Generative AI can support Business Analysts by accelerating requirement analysis, improving documentation consistency, identifying missing information, and helping convert stakeholder conversations into actionable requirements.
+## Architecture
+
+```text
+Business Analyst / Stakeholder
+            |
+            v
+      React Frontend
+            |
+            | POST /api/analyze
+            v
+    Node.js + Express API
+            |
+            v
+     Anthropic Claude API
+            |
+            v
+  Requirements Intelligence
+            |
+            v
+ Structured BA Artifacts
+```
+
+---
+
+## Technology Stack
+
+### Frontend
+
+- React
+- JavaScript
+- CSS
+- Vite
+
+### Backend
+
+- Node.js
+- Express.js
+
+### AI Integration
+
+- Anthropic Claude API
+- Prompt Engineering
+
+### Development
+
+- Git
+- GitHub
+- Visual Studio Code
+- REST API integration
+
+---
+
+## Key Features
+
+- Converts unstructured stakeholder input into structured requirements
+- Generates multiple Business Analysis artifacts from a single input
+- Identifies potential risks, gaps, and assumptions
+- Generates stakeholder clarification questions
+- Creates user stories and acceptance criteria
+- Separates AI-generated output into readable analysis sections
+- Uses a backend API layer to keep AI integration separate from the frontend
+- Provides a responsive Business Analyst workspace
+
+---
+
+## Why This Project Matters
+
+Generative AI does not replace stakeholder collaboration or Business Analyst judgment.
+
+Instead, this project demonstrates how AI can act as a requirements intelligence assistant by helping analysts:
+
+- Accelerate initial requirement analysis
+- Identify missing information earlier
+- Improve documentation consistency
+- Generate questions for requirement clarification
+- Convert raw business discussions into structured artifacts
+- Spend more time validating business needs and less time formatting documentation
+
+---
 
 ## Security
 
-The Anthropic API key is stored in a local environment variable and is excluded from source control. API credentials are not committed to this repository.
+The Anthropic API key is stored in an environment variable and is not hard-coded into the frontend application.
+
+Example:
+
+```env
+ANTHROPIC_API_KEY=your_api_key
+```
+
+The `.env` file should remain excluded from source control through `.gitignore`.
+
+---
 
 ## Future Enhancements
 
-- Export requirements to PDF/Word
-- Jira user-story integration
-- Requirements traceability matrix
+Potential future capabilities include:
+
+- Requirement document upload
+- PDF/DOCX requirement analysis
 - Requirement prioritization
-- AI-assisted change-impact analysis
-- Upload meeting transcripts for automatic requirement extraction
+- MoSCoW classification
+- Requirements Traceability Matrix (RTM)
+- Jira integration
+- Requirement quality scoring
+- Duplicate requirement detection
+- Export to BRD/FRD
+- AI-assisted change impact analysis
 
-## Author
+---
 
-**Vineela Nimmala**
+## Project Goal
 
-Business Analyst | Data Analyst | AI Business Analysis
+The goal of this project is to demonstrate the practical application of Generative AI in Business Analysis by combining:
+
+**Business Analysis + Requirements Engineering + Prompt Engineering + Claude AI + Application Development**
+
+to create an AI-assisted requirements analysis workflow.
